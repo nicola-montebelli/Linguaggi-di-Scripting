@@ -24,6 +24,21 @@
         console.log("- " + spesa2[i]);
     }
 
+  //alternativa con array di oggetti
+    const spesa3 = [
+      {nome: "Uova", qta: 4, misura: "pz"},
+      {nome: "Tonno", qta: 300, misura: "g"},
+      {nome: "Carote", qta: 500, misura: "g"},
+      {nome: "Tè", qta: 2, misura: "l"}
+    ];
+
+    for(let i = 0; i<spesa3.length; i++)
+    {
+      const itm = spesa3[i];
+      console.log(` - ${itm.nome}: ${itm.qta} ${itm.misura}`)
+    }
+    
+
 
 /*Creare il file `esercizio-02.js` dentro al quale scrivere il codice JavaScript che realizza i seguenti punti:
   - creare un array contenente almeno 10 numeri interi
