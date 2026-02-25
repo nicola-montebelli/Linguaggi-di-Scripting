@@ -7,10 +7,22 @@
 
     const spesa = ["uova : 6 pz","latte : 2l","sedano : 500 g","pasta di mandorle : 2 pz","dentifricio : 3 pz"];
     const spesa2 = ["fagioli : 2 kg","acqua : 2l","fazzoletti : 4 pz"];
-    console.log(spesa);
+    console.log("Lista spesa 1: ");
+    for(let i = 0; i < spesa.length; i++)
+    {
+        console.log("- " + spesa[i]);
+    }
     spesa.shift();
     spesa.push("zucchero : 2 kg");
-    console.log(spesa);
+    for(let i = 0; i < spesa.length; i++)
+    {
+        console.log("- " + spesa[i]);
+    }
+    console.log("Lista spesa 2: ");
+    for(let i = 0; i < spesa2.length; i++)
+    {
+        console.log("- " + spesa2[i]);
+    }
 
 
 /*Creare il file `esercizio-02.js` dentro al quale scrivere il codice JavaScript che realizza i seguenti punti:
