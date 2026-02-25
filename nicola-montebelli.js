@@ -50,9 +50,9 @@
     if(numeri[i]%2==0)
     {
         if(numeri[i] == 0) console.log(numeri[i], " zero non è ne pari ne dispari");
-        else console.log(numeri[i]," è pari");
+        else console.log(numeri[i]+ " è pari");
     }
-    else console.log(numeri[i], " è dispari");
+    else console.log(numeri[i]+ " è dispari");
   }
 
 
