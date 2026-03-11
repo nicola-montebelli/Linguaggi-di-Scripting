@@ -1,0 +1,62 @@
+######################
+# Project Specific
+######################
+
+bower_components/
+
+######################
+# Node
+######################
+node_modules/
+#package-lock.json
+*.js
+*.map
+
+######################
+# SASS
+######################
+.sass-cache/
+
+
+*.tmp
+*.bak
+*.swp
+
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+######################
+# Mac OSX
+######################
+.DS_Store
+.sh_history
+
+# Thumbnails
+._*
+
+######################
+# Logs
+######################
+*.log
+
+######################
+# Others
+######################
+*.*~
+*~
+
+/.idea/
+/.vscode/
+
+# ignoro le sottocartelle con le prove degli studenti
+studenti/
+
+# Ignoro i sorgenti Keynote
+*.key
+
