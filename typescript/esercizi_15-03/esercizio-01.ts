@@ -39,4 +39,5 @@ function convertiInLettereNumeroX(numero: number)
         default: console.log("Devi inserire un numero tra 0 e 9");
     }
 }
+
 convertiInLettereNumeroX(6);

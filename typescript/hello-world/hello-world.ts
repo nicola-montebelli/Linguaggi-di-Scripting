@@ -358,8 +358,6 @@ console.log(om.name, om.operation(2, 5));
 // il vantaggio maggiore nell'avere la possibilità di passare delle funzioni
 // come parametro lo si può apprezzare nelle funzioni:
 
-setTimeout(() => {
-    console.log("Questo messaggio arriverà dopo 10 secondi");
-}, 10000);
+setTimeout(() => {console.log("Questo messaggio arriverà dopo 10 secondi");}, 10000);
 
 console.log("Questo messaggio arriverà subito");
