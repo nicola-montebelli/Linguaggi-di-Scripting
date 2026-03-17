@@ -9,7 +9,7 @@ function convertiInLettereNumeroXX(numero: number)
 {
     const numeroAstringa = Math.abs(numero).toString();
 
-    if(numeroAstringa.length == 2)
+    if(numeroAstringa.length >= 2)
     {
         const decinaTrovata = parseInt(numeroAstringa.charAt(0));
         if(decinaTrovata == 1)
