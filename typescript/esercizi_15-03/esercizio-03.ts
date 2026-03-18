@@ -2,59 +2,53 @@
  - all'interno del file definire una funzione con nome `convertiInLettereNumeroXXX` che
    accetta come parametro un numero compreso tra 0 e 999 e ne restituisce la stringa che
    rappresenta il numero in lettere nella lingua italiana.
-
-
 Riutilizzare possibilmente le funzioni definite negli esercizi precedenti.
 */
 
+import { convertiInLettereNumeroXX } from "./esercizio-02";
+import { convertiInLettereNX_array } from "./esercizio-01";
 
-function trovaCentinaia(numero: number){
-    const numeroAbs = Math.abs(numero);
-    const divisione = numeroAbs/10;
-    const centinaiaTrovata = Math.floor(divisione);
-    return centinaiaTrovata % 10;
-}
-//metodo matematico
-
-
-function convertiInLettereNumeroXXX(numero: number)
+export function convertiInLettereNumeroXXX(n: number): string
 {
-    const numeroAstringa = Math.abs(numero).toString();
+    let risultato: string = ''
+    const centinaia: string[] = ['','cento','duecento','trecento','quattrocento','cinquecento','seicento','settecento','ottocento','novecento'];
 
-    if(numeroAstringa.length == 3)
+    if(Number.isInteger(n) && n >=0 && n <= 999)
     {
-        const centinaiaTrovata = parseInt(numeroAstringa.charAt(0));
-        { 
-            switch(centinaiaTrovata)
-            {
-                case 1: console.log("cento");
-                break;
+        let centinaiaTrovata = Math.floor(n / 100);
 
-                case 2: console.log("duecento");
-                break;
-        
-                case 3: console.log("trecento");
-                break;
-        
-                case 4: console.log("quattrocento");
-                break;
-        
-                case 5: console.log("cinquecento");
-                break;
-        
-                case 6: console.log("seicento");
-                break;
-        
-                case 7: console.log("settecento");
-                break;
-        
-                case 8: console.log("ottocento");
-                break;
-        
-                case 9: console.log("novecento");
-                break;
-            }
+        let unitaEdecineTrovate = n % 100;
+
+        let StringaCentinaia = '';
+        let StringaUnitaDecine = '';
+
+        if(centinaiaTrovata === 0)
+        {
+            StringaCentinaia = '';
+            StringaUnitaDecine = convertiInLettereNumeroXX(unitaEdecineTrovate);
         }
+        else if(unitaEdecineTrovate === 0)
+        {
+            StringaCentinaia = centinaia[centinaiaTrovata] || '';
+            StringaUnitaDecine = '';
+        }
+        else
+        {
+            StringaCentinaia = centinaia[centinaiaTrovata] || '';
+            StringaUnitaDecine = convertiInLettereNumeroXX(unitaEdecineTrovate);
+        }
+        risultato = StringaCentinaia + StringaUnitaDecine;
     }
+
+    return risultato;
 }
-convertiInLettereNumeroXXX(555);
+
+
+function generaRandomInt(max: number): number {
+    return Math.floor( Math.random() * max );
+}
+
+for (let i = 0; i < 50; i++) {
+    const n: number = generaRandomInt(1000);
+    console.log( n + ' => ' + convertiInLettereNumeroXXX(n) );
+}

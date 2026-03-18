@@ -5,83 +5,71 @@
 
 Riutilizzare possibilmente le funzioni definite negli esercizi precedenti.*/
 
-function convertiInLettereNumeroXX(numero: number)
+import { convertiInLettereNX_array  } from "./esercizio-01";        //importare la funzione dalla cartella o file in cui è presente
+export function convertiInLettereNumeroXX(n: number): string
 {
-    const numeroAstringa = Math.abs(numero).toString();
+    let risultato: string = '';
+    const decine: string[] =['', 'dieci', 'venti', 'trenta', 'quaranta', 'cinquanta', 'sessanta', 'settanta', 'ottanta', 'nove'];
+    const decineSpeciali: string[] = ['','','','','','','','','','','','undici','dodici','tredici','quattordici','quindici','sedici','diciassette','diciotto','diciannove']
 
-    if(numeroAstringa.length >= 2)
+    if(Number.isInteger(n) && n >= 0 && n <= 99)
     {
-        const decinaTrovata = parseInt(numeroAstringa.charAt(0));
-        if(decinaTrovata == 1)
+        // Per ottenere le decine, dividiamo per 10 e arrotondiamo per difetto
+        let decinaTrovata = Math.floor(n / 10);
+        // Per ottenere le unità, usiamo il resto della divisione per 10
+        let unitaTrovata = n % 10;
+
+        let StringaDecina = '';
+        let StringaUnita = '';
+
+        if(n >= 11 && n <= 19)
         {
-            const unità = parseInt(numeroAstringa.charAt(1));
-            switch(unità)
-            {
-                case 1: return "undici";
-                break;
+            StringaDecina = decineSpeciali[n] || '';
+            StringaUnita = '';
+        }
 
-                case 2: console.log("dodici");
-                break;
-
-                case 3: console.log("tredici");
-                break;
-
-                case 4: console.log("quattordici");
-                break;
-
-                case 5: console.log("quindici");
-                break;
-
-                case 6: console.log("sedici");
-                break;
-
-                case 7: console.log("diciassette");
-                break;
-
-                case 8: console.log("diciotto");
-                break;
-
-                case 9: console.log("diciannove");
-                break;
-            }
+       else if(decinaTrovata === 0)
+        {
+            StringaDecina = '';
+            StringaUnita = convertiInLettereNX_array(unitaTrovata);
+        }
+        else if(unitaTrovata === 0 && decine[decinaTrovata])
+        {
+            StringaDecina = decine[decinaTrovata];
+            StringaUnita = '';
         }
         else
-        { 
-            switch(decinaTrovata)
+        {
+            StringaDecina = decine[decinaTrovata] || '';
+            StringaUnita = convertiInLettereNX_array(unitaTrovata);
+
+            if(iniziaConVocale(StringaUnita))
             {
-                case 2: console.log("venti");
-                break;
-        
-                case 3: console.log("trenta");
-                break;
-        
-                case 4: console.log("quaranta");
-                break;
-        
-                case 5: console.log("cinquanta");
-                break;
-        
-                case 6: console.log("sessanta");
-                break;
-        
-                case 7: console.log("settanta");
-                break;
-        
-                case 8: console.log("ottanta");
-                break;
-        
-                case 9: console.log("novanta");
-                break;
+                StringaDecina = StringaDecina.slice(0,-1);
             }
         }
+        risultato = StringaDecina + StringaUnita;
+    }else {
+        return "Devi inserire un numero tra 0 e 99";
     }
+    return risultato;
 }
 
-for(let i=11; i<20; i++)
+function generaRandom(max: number): number
 {
-convertiInLettereNumeroX(i);       //for per controllare se le decine specifiche vengono stampate
+    return Math.floor(Math.random()* max);      //funzione che genera numeri random
+}
+
+for (let i = 0; i < 10; i++) {
+    const n: number = generaRandom(30);
+    console.log(convertiInLettereNumeroXX(n));
 }
 
 
-//difficoltà nell' usare una funzione dentro l'altra chiedere al prof se si può fare in classe
-//convertiInLettereNumeroXX( () => {convertiInLettereNumeroX(47);}, 47);
+function iniziaConVocale(str: string ): boolean 
+{
+  if (!str) return false; // Gestisce stringhe vuote
+  const vocali = ['a', 'e', 'i', 'o', 'u'];
+  const primoCarattere = str.trim().charAt(0).toLowerCase();
+  return vocali.includes(primoCarattere);
+}
