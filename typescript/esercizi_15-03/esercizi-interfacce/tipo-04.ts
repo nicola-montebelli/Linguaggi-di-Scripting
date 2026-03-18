@@ -68,7 +68,7 @@ function verificaContattoConRegExp(c: Contatto): boolean {
     if(c && c.nome && c.telefono)
     {
         //let pattern = new RegExp('[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]');
-        let patternAlt = new RegExp('\d{3}-\d{3}-\d{4}');  //da controllare perchè il return da sempre falso
+        let patternAlt = new RegExp('[0-9]{3}-[0-9]{3}-[0-9]{4}');  //da controllare perchè il return da sempre falso
         result = patternAlt.test(c.telefono);
     }
     return result;
