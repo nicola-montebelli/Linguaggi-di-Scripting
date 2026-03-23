@@ -12,7 +12,8 @@ dist
 tsconfig.json
 *.d.ts
 *.js
-#package-lock.json
+package-lock.json
+package.json
 
 
 *.map
