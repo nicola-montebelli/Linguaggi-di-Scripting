@@ -9,8 +9,11 @@ bower_components/
 ######################
 node_modules/
 dist
-tsconfig
+tsconfig.json
+*.d.ts
+*.js
 #package-lock.json
+
 
 *.map
 
@@ -32,6 +35,7 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
+
 
 ######################
 # Mac OSX

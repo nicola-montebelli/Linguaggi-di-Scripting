@@ -30,7 +30,7 @@ interface RisultatoAnalisiTesto {
         numeroAltri: number | undefined;
     };
 
-    let frase: string = "Ecco una stringa da analizzare. Il risultato sarà un'oggetto di un'interfaccia che riporterà i conteggi dei vari caratteri e i numeri compresi tra 0-9";
+    let frase: string = "Ecco una stringa da analizzare. Il risultato sarà un'oggetto di un'nterfaccia che riporterà i conteggi dei vari caratteri e i numeri compresi tra 0-9";
 
     function analizzaStringa(stringa: string): RisultatoAnalisiTesto
     {
