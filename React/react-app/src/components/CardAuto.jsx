@@ -9,7 +9,10 @@ export default function CardAuto( {auto = {}} ) {
 
   return <>
     <Card id ={"card-" + auto.id}>
-      <Card.Img variant="top" src="https://placehold.co/300x300"/>
+      <Card.Img 
+          variant="top" 
+          src={auto.immagine ?? "https://placehold.co/600x400"} 
+          style={{aspectRatio: "16/9", objectFit: "cover"}}/>
         <Card.Body>
           <Card.Title>
             <Stack direction = "horizontal">
