@@ -43,7 +43,13 @@ export function eseguiLogin(username: string, password: string): Promise<User>
     return new Promise((resolve, reject) => {
         const loginTask = () =>{
             //cerco all'interno dell'elenco l'indice dell'elemento che ha il campo user = a quello fornito come parametro
-            const index = userList.findIndex(u => u.user === username && u.pass === password)
+            const index = userList.findIndex(u => {
+                if(u.user === username && u.pass === password)
+                    return true;
+                else
+                    return false;
+            }
+        );
             if(index >= 0)
             {
                 const user = userList[index];
@@ -53,25 +59,34 @@ export function eseguiLogin(username: string, password: string): Promise<User>
                 reject("ERRORE: Login fallito");
             }
         }
-        setTimeout(loginTask,Math.random() * 2 * 1000)
+        // uso setTimeout() per simulare un ritardo nella chiamata al server
+        setTimeout(loginTask,Math.random() * 4 * 1000)
     });
 }
 
 
-export function getUserDocuments(user_ID: number): Promise<User>
+export function getUserDocuments(user_ID: number): Promise<Document[]>
 {
     return new Promise((resolve, reject) => {
         const getUserDocuments = () =>{
             //cerco all'interno dell'elenco l'indice dell'elemento che ha il campo user = a quello fornito come parametro
-            const documentList = docList.filter(d => d.userId === user_ID)
+            const documentList = docList.filter(d => {
+                if(d.userId === user_ID)
+                    return true;
+                else
+                    return false;
+            }
+        );
+
             if(documentList)
             {
-                resolve(documentList != null);
+                resolve(documentList);
             }
             else{
                 reject("ERRORE: recupero dei documenti fallito");
             }
         }
+        // uso setTimeout() per simulare un ritardo nella chiamata al server
         setTimeout(getUserDocuments,Math.random() * 2 * 1000)
     });
 }
