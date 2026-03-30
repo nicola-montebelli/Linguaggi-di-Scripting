@@ -22,7 +22,7 @@
     console.log("(1) Elenco dei documenti per Nick: ");
     for (let i = 0; i < list.length; i++)
     {
-            //pullare lo stesso esercizio dal prof
+            console.log(" - " + list[i].fileName)
     }
  })
  .catch(err => console.error("(1) Login fallito: " + err));

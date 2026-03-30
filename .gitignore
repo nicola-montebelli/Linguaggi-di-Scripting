@@ -57,6 +57,7 @@ Desktop.ini
 ######################
 *.*~
 *~
+*.pdf
 
 /.idea/
 /.vscode/
