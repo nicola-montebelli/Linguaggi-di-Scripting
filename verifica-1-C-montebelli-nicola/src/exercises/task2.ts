@@ -5,10 +5,9 @@ export function contaPresenti(corsoId: string): number {
   // TODO:
   // usa un ciclo for
   let contati: number = 0;
-  let daContare: Corso[] = corsi.filter(c => c.id === corsoId);
-  if(corsoId)
+  for(let i = 0; i < iscrizioni.length; i++)
   {
-    for(let i = 0; i < daContare.length; i++)
+    if(iscrizioni[i].corsoId === corsoId && iscrizioni[i].presenteOggi)
     {
       contati++;
     }
@@ -23,24 +22,33 @@ export const titoliCorsiAttivi = (): string[] => {
   let titoli: string[] = corsiFiltrati.map(c => c.titolo);
   return titoli;
 };
+//alternativa del prof
+/*
+export const titoliCorsiAttivi = (): string[] => {
+  // usa filter + map
+  return corsi
+      .filter(corso => corso.attivo)
+      .map(corso => corso.titolo);
+}; 
+*/
 
 export const cercaCorso = (id: string): Corso | undefined => {
   // TODO:
   // usa find
-  let corsoTrovato = corsi.find(c => c.id);
+  let corsoTrovato = corsi.find(c => c.id === id);
   return corsoTrovato;
 };
 
 export const indicePrimoCorsoPieno = (): number => {
   // TODO:
   // usa findIndex
-  return -1;
+  return corsi.findIndex(c => c.iscritti >= c.posti);
 };
 
 export function nomiConPunteggioMinimo(minimo: number): string[] {
   // TODO:
   // usa filter + map
-  let punteggiFiltrati: Iscrizione[] = iscrizioni.filter(i => i.punteggioIngresso <= 18);
+  let punteggiFiltrati: Iscrizione[] = iscrizioni.filter(i => i.punteggioIngresso >= minimo);
   let nomi: string[] = punteggiFiltrati.map(n => n.nomeStudente);
   return nomi;
 }
@@ -58,6 +66,9 @@ export function messaggioLivello(livello: Livello): string {
     break;
 
     case "alto": stampaLivello = "Livello del corso alto";
+    break;
+
+    default: stampaLivello = "Livello non valido";
     break;
   }
   return stampaLivello;

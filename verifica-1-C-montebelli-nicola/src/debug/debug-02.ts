@@ -18,6 +18,10 @@ export const salvaSimulato = (nome: string): Promise<string> => {
     if (nome.length > 0) {
       setTimeout(() => resolve("Salvato: " + nome), 200);
     }
-    reject("Nome mancante");
+    // FIX: il reject dovrebbe essere alternativo al resolve, mancava l'else
+    else
+    {
+      reject("Nome mancante");
+    }
   });
 };

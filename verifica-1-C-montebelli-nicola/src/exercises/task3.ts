@@ -8,12 +8,22 @@ export function recuperaCorsoDaBackend(id: string): Promise<Corso> {
     // 2. dopo 300ms cerca il corso con find
     // 3. se trovato -> resolve(corso)
     // 4. se non trovato -> reject("corso non trovato")
-    const recuperaCorsoDaBackend = () => {
-      if(!id || id === " ")
+      if(!id || !id.trim())
       {
         reject("id non valido");
       }
-    }
+
+      setTimeout(() => {
+        const corso = corsi.find(c => c.id === id);
+        if(corso)
+        {
+          resolve(corso);
+        }
+        else
+        {
+          reject("corso non trovato");
+        }
+      }, 300);
   });
 }
 
@@ -24,5 +34,13 @@ export function stampaEsitoRicerca(id: string): Promise<string> {
     // "TROVATO: Web Base (12/15)"
     // se c'è errore:
     // "ERRORE: corso non trovato"
+    const corso = corsi.find(c => c.id === id);
+    if(corso)
+    {
+      resolve(`TROVATO: ${corso.titolo} (${corso.iscritti}/${corso.posti})`);
+    }
+    else{
+      reject("ERRORE: corso non trovato");
+    }
   });
 }

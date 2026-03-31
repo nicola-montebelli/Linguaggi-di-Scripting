@@ -10,6 +10,6 @@ export function totalSeats(values: number[]): number {
 
 export function makeLabel(title: string): string {
   const label: string = "corso: " + title;  //FIX: aggiunto il type string alla const label
-  label.toUpperCase();
-  return label;
+  return label.toUpperCase();   //FIX: la funzione label.toUpperCase() non modifica l'array originale, ritorna la copia modificata
+  
 }
