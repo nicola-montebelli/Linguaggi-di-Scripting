@@ -1,0 +1,20 @@
+<button
+    class="btn btn-primary"
+    [disabled]="!allowNewServer"
+    (click)="onCreateServer()"
+>Add Server</button>
+<!-- ^ esempio di property binding ed event binding-->
+ <p>{{serverCreationStatus}}</p>
+
+ <input
+    type="text"
+    class="form-control"
+    (input)="onUpdateServerName($event)"
+>
+<p>{{serverName}}</p>
+<!--^ event binding parameters (slide 44)-->
+<app-server></app-server>
+<app-server></app-server>
+<app-server></app-server>
+<app-server></app-server>
+<app-server></app-server>

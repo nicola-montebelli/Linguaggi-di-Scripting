@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+/*Lo stile globale dell'applicazione viene definito qui*/
+/*Lo stile per i componenti singoli va definito nei file app.css o server.css e sovrascrivono lo stile globale.
+ Ricordarsi di specificare nel @Component l'url nell'attributo styleUrl */
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import "bootstrap/dist/css/bootstrap.css";
+body {
+    color: green;
+}
