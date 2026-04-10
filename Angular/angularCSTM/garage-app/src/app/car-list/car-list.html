@@ -1,0 +1,28 @@
+@if(message.length > 0){
+    <p class="">{{message}}</p>
+}
+<h1 class="titolo">Garage-App</h1>
+@if(carList.length > 0)
+{
+    <ul>
+        <div class="d-flex flex-row flex-wrap gap-3">
+        @for (c of carList; track c.id){
+            <!-- <li>
+                marca: {{c.marca}},
+                modello: {{c.modello}},
+                targa: {{c.targa}}
+            </li> -->
+        
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src={{c.immagine}} alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{c.marca}}</h5>
+                    <p class="card-text">Modello: {{c.modello}} - Targa: {{c.targa}} - Colore: {{c.colore}} - Anno: {{c.anno}} - 
+                        {{c.disponibile ? 'Disponibile' : 'Non disponibile'}}
+                    </p>
+                </div>
+            </div>
+        }
+        </div>
+    </ul>
+}
