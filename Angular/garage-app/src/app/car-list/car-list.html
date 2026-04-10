@@ -1,0 +1,15 @@
+@if(message.length > 0){
+    <p class="">{{message}}</p>
+}
+@if(carList.length > 0)
+{
+    <ul>
+        @for (c of carList; track c.id){
+            <li>
+                marca: {{c.marca}},
+                modello: {{c.modello}},
+                targa: {{c.targa}}
+            </li>
+        }
+    </ul>
+}

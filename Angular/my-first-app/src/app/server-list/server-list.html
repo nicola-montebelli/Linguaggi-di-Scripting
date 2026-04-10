@@ -9,12 +9,25 @@
  <input
     type="text"
     class="form-control"
-    (input)="onUpdateServerName($event)"
+    [(ngModel)]="serverName"
 >
 <p>{{serverName}}</p>
+
+@if (serverWasCreated){
+    <p>
+        A new server was created with name: {{ serverName }}
+    </p>
+}
+<!-- ^ nuova sintassi-->
+
+<!-- <p *ngIf="serverWasCreated">
+  A new server was created with name: {{ serverName }}
+</p> -->
 <!--^ event binding parameters (slide 44)-->
-<app-server></app-server>
-<app-server></app-server>
-<app-server></app-server>
-<app-server></app-server>
-<app-server></app-server>
+
+@for (server of serverList; track server){
+    <app-server [name]="server"
+                (removed)="onServerRemoved($event)">
+    </app-server>
+}
+<!-- server è la variabile che assume il valore di un elemento dell'array serverList-->

@@ -1,2 +1,15 @@
-<h3>{{ 'Server'}} with id {{serverId}} is {{getServerStatus()}}</h3>
-<!-- esempio di string interpolation con costante, variabile e valore preso con una funzione get-->
+<h3 [ngStyle]="{backgroundColor: getColor()}"
+    [ngClass]="{online: getServerStatus() === 'online'}">
+    {{ name }} with id {{serverId}} is {{getServerStatus()}}
+<span style="float: right;">
+    <button class="btn btn-primary" (click)="onReboot()"><i class="fa-solid fa-rotate"></i></button>
+</span>
+<span style="float: right;">
+    <button class="btn btn-primary" (click)="onRemove()"><i class="fa-solid fa-trash-can"></i></button>
+</span>
+</h3>
+<!-- esempio di string interpolation con costante, 
+ variabile e valore preso con una funzione get-->
+
+ <!--ngStyle slide 50-->
+ <!-- ngClass slide 51-->

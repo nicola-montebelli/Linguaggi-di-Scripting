@@ -7,14 +7,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { FormsModule } from '@angular/forms';
-import { ServerComponent } from './server/server';
-import { ServerList } from './server-list/server-list';
+import { CarList } from './car-list/car-list';
+import { Car } from './car/car';
 
 @NgModule({
-  declarations: [App, ServerComponent, ServerList],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-  exports: [App],
+  declarations: [App, CarList, Car],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),

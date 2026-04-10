@@ -4,6 +4,3 @@
  Ricordarsi di specificare nel @Component l'url nell'attributo styleUrl */
 @import '@fortawesome/fontawesome-free/css/all.css';
 @import "bootstrap/dist/css/bootstrap.css";
-body {
-    color: green;
-}
