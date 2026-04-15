@@ -12,11 +12,13 @@ export class CarList {
   message: string = '';
 
   constructor(private carService: CarService){
+    //richiama il service per ottenere l'elenco
     this.carService.getCarList()
     .then(list => {
       this.carList = list;
     })
     .catch(err => {
+      console.error("Errore", err);
       this.message = err;
     })
   }

@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+import { Car } from './car/car';
 
 export interface ICar {
     id: number,
@@ -6,7 +9,7 @@ export interface ICar {
     modello: string,
     immagine: string,
     anno: number,
-    targa: string,
+    targa?: string,
     colore: string,
     disponibile: boolean,
     km: number
@@ -16,146 +19,16 @@ export interface ICar {
   providedIn: 'root',
 })
 export class CarService {
+private garage: ICar[] = [];
+private baseUrl = 'https://my-json-server.typicode.com/andreagaspari/zav-react-25/automobili';
 
-  garage: ICar[] = [
-  {
-    "id": 1,
-    "marca": "Fiat",
-    "modello": "Panda",
-    "immagine": "https://dimages2.gazzettaobjects.it/files/image_528_298/uploads/2022/02/11/6205ba15a8c55.jpeg",
-    "anno": 2022,
-    "targa": "AB123CD",
-    "colore": "Rosso",
-    "disponibile": true,
-    "km": 15000
-  },
-  {
-    "id": 2,
-    "marca": "Volkswagen",
-    "modello": "Golf",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/VW_Golf_III_front_20070522.jpg/1280px-VW_Golf_III_front_20070522.jpg",
-    "anno": 2021,
-    "targa": "EF456GH",
-    "colore": "Verde",
-    "disponibile": false,
-    "km": 23000
-  },
-  {
-    "id": 3,
-    "marca": "Tesla",
-    "modello": "Model 3",
-    "immagine": "https://www.greenstart.it/wp/wp-content/uploads/2017/05/tesla-model-3-nera-spy.jpg",
-    "anno": 2023,
-    "targa": "IJ789KL",
-    "colore": "Nero",
-    "disponibile": true,
-    "km": 5000
-  },
-  {
-    "id": 4,
-    "marca": "BMW",
-    "modello": "Serie 1",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/0/06/BMW_1er_%28E87%29_front.JPG",
-    "anno": 2020,
-    "targa": "LM123NO",
-    "colore": "Grigio",
-    "disponibile": true,
-    "km": 18000
-  },
-  {
-    "id": 5,
-    "marca": "Audi",
-    "modello": "A3",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Audi_A3_I_1.9_TDI_Facelift_front_20100509.jpg/1280px-Audi_A3_I_1.9_TDI_Facelift_front_20100509.jpg",
-    "anno": 2022,
-    "targa": "PQ456RS",
-    "colore": "Blu",
-    "disponibile": false,
-    "km": 12000
-  },
-  {
-    "id": 6,
-    "marca": "Mercedes",
-    "modello": "Classe A",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mercedes-Benz_A_200_Monrepos_2018_IMG_0083.jpg/1280px-Mercedes-Benz_A_200_Monrepos_2018_IMG_0083.jpg",
-    "anno": 2021,
-    "targa": "TU789VW",
-    "colore": "Grigio",
-    "disponibile": true,
-    "km": 8000
-  },
-  {
-    "id": 7,
-    "marca": "Toyota",
-    "modello": "Yaris",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/2015_Toyota_Yaris_%28NCP130R%29_Ascent_5-door_hatchback_%282015-07-14%29_01.jpg/1920px-2015_Toyota_Yaris_%28NCP130R%29_Ascent_5-door_hatchback_%282015-07-14%29_01.jpg",
-    "anno": 2023,
-    "targa": "XY123ZA",
-    "colore": "Azzurro",
-    "disponibile": true,
-    "km": 3000
-  },
-  {
-    "id": 8,
-    "marca": "Ford",
-    "modello": "Focus",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Ford_Focus_II_RS.JPG/1280px-Ford_Focus_II_RS.JPG",
-    "anno": 2019,
-    "targa": "BC234DE",
-    "colore": "Verde",
-    "disponibile": false,
-    "km": 35000
-  },
-  {
-    "id": 9,
-    "marca": "Hyundai",
-    "modello": "i30",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Hyundai_-_i30_-_Mondial_de_l%27Automobile_de_Paris_2012_-_001.jpg/1280px-Hyundai_-_i30_-_Mondial_de_l%27Automobile_de_Paris_2012_-_001.jpg",
-    "anno": 2020,
-    "targa": "FG567HI",
-    "colore": "Rosso",
-    "disponibile": true,
-    "km": 22000
-  },
-  {
-    "id": 10,
-    "marca": "Peugeot",
-    "modello": "208",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/f/f3/2020_Peugeot_208_GT_Line_PureTech_1.2_Front.jpg",
-    "anno": 2022,
-    "targa": "JK890LM",
-    "colore": "Azzurro",
-    "disponibile": true,
-    "km": 5000
-  },
-  {
-    "id": 11,
-    "marca": "Renault",
-    "modello": "Clio",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/7/74/Renault_Clio_2006_silver_vl.jpg",
-    "anno": 2021,
-    "targa": "NO123PQ",
-    "colore": "Grigio",
-    "disponibile": false,
-    "km": 27000
-  },
-  {
-    "id": 12,
-    "marca": "Kia",
-    "modello": "Ceed",
-    "immagine": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kia_Pro_Ceed_GT_-_Mondial_de_l%27Automobile_de_Paris_2014_-_001.jpg/1280px-Kia_Pro_Ceed_GT_-_Mondial_de_l%27Automobile_de_Paris_2014_-_001.jpg",
-    "anno": 2020,
-    "targa": "RS456TU",
-    "colore": "Bianco",
-    "disponibile": true,
-    "km": 15000
-  }
-];
+constructor(private http: HttpClient){
 
-getCarList(): Promise<ICar[]> {
-  return Promise.resolve(this.garage)
 }
-//è l'equivalente di:
+// getCarList(): Promise<ICar[]> {
+//   return Promise.resolve(this.garage)
+// }
+//^ è l'equivalente di:
 /**
  * return new Promise((resolve, reject) => {
       // effettura chiamate http per recuperare i dati
@@ -163,4 +36,30 @@ getCarList(): Promise<ICar[]> {
       resolve(this.garage);
     });
  */
+
+getCarList(): Promise<ICar[]> {
+    return firstValueFrom(this.http.get<ICar[]>(this.baseUrl));
+  }   
+//^ chiamata http tipo get all'url del database per recuperare la lista di auto
+
+
+ getCar(id: number): Promise<ICar>{
+    return firstValueFrom(this.http.get<ICar>(this.baseUrl + '/' + id));
+  }
+//^ chiamata http get al database per recuperare il singolo dato
+//unendo all'url /id dove id coincide con l'id dell'auto
+
+
+
+
+  // getCar(id: number): Promise<ICar>{
+  //   return new Promise((resolve, reject) => {
+  //     const car: ICar | undefined = this.garage.find(c => c.id === id);
+  //       if (car) {
+  //         resolve(car);
+  //       } else {
+  //         reject('Car Not Found');
+  //       }
+  //   });
+  // }
 }

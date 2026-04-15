@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ICar } from '../car-service';
 
 @Component({
   selector: 'app-car',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './car.html',
   styleUrl: './car.css',
 })
-export class Car {}
+export class Car {
+  @Input() car: ICar | null = null;
+}

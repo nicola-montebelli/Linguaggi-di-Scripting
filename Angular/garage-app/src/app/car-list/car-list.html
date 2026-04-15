@@ -1,15 +1,15 @@
-@if(message.length > 0){
-    <p class="">{{message}}</p>
+@if (message) {
+  <div class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
 }
-@if(carList.length > 0)
-{
-    <ul>
+
+    <div class="d-flex flex-row flex-wrap gap-3">
         @for (c of carList; track c.id){
-            <li>
-                marca: {{c.marca}},
+            
+                <!--marca: {{c.marca}},
                 modello: {{c.modello}},
-                targa: {{c.targa}}
-            </li>
+                targa: {{c.targa}}-->
+                <app-car [car]="c"></app-car>
         }
-    </ul>
-}
+    </div>
