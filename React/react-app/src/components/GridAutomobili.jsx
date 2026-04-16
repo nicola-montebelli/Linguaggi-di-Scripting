@@ -28,7 +28,7 @@ export default function GridAutomobili(){
     }
 {/*Caricamento Asincrono delle automobili */}
     useEffect(() => {
-        const fetchAuto = async function() {
+        const fetchAuto = async function() { {/*async function() .... await getAutomobili è un modo moderno per fare Promise*/}
         let tempAuto = await getAutomobili(filtriAuto); {/* getAutomobili() prende i valori da automobili.js*/}
         setListaAuto(tempAuto);
         setLoaded(true);
