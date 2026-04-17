@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { filter, firstValueFrom, mergeMap, Observable, toArray } from 'rxjs';
 import { Car } from './car/car';
 
 export interface ICar {
@@ -25,17 +25,7 @@ private baseUrl = 'https://my-json-server.typicode.com/andreagaspari/zav-react-2
 constructor(private http: HttpClient){
 
 }
-// getCarList(): Promise<ICar[]> {
-//   return Promise.resolve(this.garage)
-// }
-//^ è l'equivalente di:
-/**
- * return new Promise((resolve, reject) => {
-      // effettura chiamate http per recuperare i dati
-      // ...
-      resolve(this.garage);
-    });
- */
+
 
 getCarList(): Promise<ICar[]> {
     return firstValueFrom(this.http.get<ICar[]>(this.baseUrl));
@@ -49,17 +39,38 @@ getCarList(): Promise<ICar[]> {
 //^ chiamata http get al database per recuperare il singolo dato
 //unendo all'url /id dove id coincide con l'id dell'auto
 
+/**
+ * Implementazione tramite Observable
+ */
+getCarList$(searchText?: string): Observable<ICar[]> {
+  if(searchText && searchText.length > 0){
+    //qui deve filtrare
+    return this.http.get<ICar[]>(this.baseUrl).pipe(
+        mergeMap(list => list),
+        filter(car => {
+          const s = searchText.trim().toLowerCase();
+          const ss = searchText.split(' ');
+          return ss.every(p => {        //questo ci permette di fare una search del tipo: bmw grigia
+              return car.marca.toLowerCase().includes(p) ||
+                    car.modello.toLowerCase().includes(p) ||
+                    car.colore.toLowerCase().includes(p) ||
+                    (car.targa != null && car.targa.toLowerCase().includes(p))
+          });
+          
+  }),
+        toArray()
+      );
+  } else{
+    return this.http.get<ICar[]>(this.baseUrl);
+  }
+  }   
+
+getCar$(id: number): Observable<ICar>{
+    return this.http.get<ICar>(this.baseUrl + '/' + id);
+  }
 
 
 
-  // getCar(id: number): Promise<ICar>{
-  //   return new Promise((resolve, reject) => {
-  //     const car: ICar | undefined = this.garage.find(c => c.id === id);
-  //       if (car) {
-  //         resolve(car);
-  //       } else {
-  //         reject('Car Not Found');
-  //       }
-  //   });
-  // }
 }
+
+

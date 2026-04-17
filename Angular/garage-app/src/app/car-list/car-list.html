@@ -1,3 +1,8 @@
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Enter Search text" aria-label="Enter search text" aria-describedby="button-addon2" [(ngModel)]="searchText" (input)="onSearch()">
+  <button class="btn btn-outline-secondary" type="button" id="button-search" (click)="onSearch()">Search</button>
+</div>
+
 @if (message) {
   <div class="alert alert-danger" role="alert">
     {{ message }}
