@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { filter, firstValueFrom, mergeMap, Observable, toArray } from 'rxjs';
 import { Car } from './car/car';
+import { CarList } from './car-list/car-list';
 
 export interface ICar {
     id: number,

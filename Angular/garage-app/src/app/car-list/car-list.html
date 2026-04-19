@@ -11,10 +11,8 @@
 
     <div class="d-flex flex-row flex-wrap gap-3">
         @for (c of carList; track c.id){
-            
-                <!--marca: {{c.marca}},
-                modello: {{c.modello}},
-                targa: {{c.targa}}-->
+              <!-- c (elemento corrente del ciclo for | carList (car-list.ts) è l'array di tipo ICar)-->
                 <app-car [car]="c"></app-car>
+                <!-- [car] è l' @Input del componente car.ts | c è l'elemento corrente del ciclo for -->
         }
     </div>

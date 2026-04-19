@@ -12,11 +12,11 @@ export class CarList implements OnInit, OnDestroy {
   carList: ICar[] = [];
   message: string | null  = '';
   searchText: string = '';
-
   sub: Subscription | null = null;
 
   constructor(private carService: CarService){}
-
+  
+  
 //lifecycle hooks
   ngOnInit() {
     //richiama il service per ottenere l'elenco (implementazione con Promise file car-service.ts)
@@ -31,7 +31,7 @@ export class CarList implements OnInit, OnDestroy {
     // })
 
     //implementazione con Observable
-    this.carService.getCarList$().subscribe(
+    this.carService.getCarList$().subscribe(  //chiedere al prof riguardo a carService, mergemap
       list => {
       this.carList = list;
       this.message = null;
