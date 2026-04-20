@@ -12,9 +12,10 @@ import { Car } from './car/car';
 import { CarDetails } from './car-details/car-details';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CarEdit } from './car-edit/car-edit';
 
 @NgModule({
-  declarations: [App, CarList, Car, CarDetails],
+  declarations: [App, CarList, Car, CarDetails, CarEdit],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
     HttpClientModule,
@@ -22,6 +23,6 @@ import { FormsModule } from '@angular/forms';
     provideZoneChangeDetection({ eventCoalescing: true }),
   ],
 
-   bootstrap: [App],
+  bootstrap: [App],
 })
 export class AppModule {}

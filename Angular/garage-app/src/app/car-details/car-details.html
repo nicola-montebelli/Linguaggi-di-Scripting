@@ -3,7 +3,13 @@
     <i class="fa-solid fa-chevron-left"></i>Elenco
   </a>
 </div>
-<h3>Dettaglio</h3>
+@if(car){
+  <div class="d-flex gap-5">
+    <h3>Dettaglio</h3>
+    <a [routerLink]="'/car/' + carId + '/edit'" class="btn btn-warning">Modifica</a>
+  </div>
+}
+
 @if(message){
   <div class="alert alert-danger" role="alert">
     {{ message }}

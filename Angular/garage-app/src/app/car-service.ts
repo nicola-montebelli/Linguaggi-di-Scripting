@@ -68,6 +68,8 @@ getCarList$(searchText?: string): Observable<ICar[]> {
 
 getCar$(id: number): Observable<ICar>{
     return this.http.get<ICar>(this.baseUrl + '/' + id);
+    //vedere sul repo del prof gli esempi di come convertire un'oggetto ICarBackend in un oggetto ICar
+    //per l'evenienza in cui l'oggetto venga passato dal backend
   }
 
 

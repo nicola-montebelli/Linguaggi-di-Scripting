@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CarDetails implements OnInit {
   @Input() car: ICar | null = null;
   message: string | null = null;
+  carId: string | null = '';
 
   constructor(private activatedRoute: ActivatedRoute, 
     private carService: CarService){
@@ -19,9 +20,9 @@ export class CarDetails implements OnInit {
 
     //con questa funzione recuperiamo il parametro che ci serve per il routing
     ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id'); //'id' dalla configurazione del Router
+     this.carId = this.activatedRoute.snapshot.paramMap.get('id'); //'id' dalla configurazione del Router
     // console.log('CarDetails.ngOnInit(): car id=', id);
-    if (id != null) {
+    if (this.carId != null) {
     //   this.carService.getCar(Number(id))
     //     .then(c => {
     //       this.car = c;
@@ -33,14 +34,14 @@ export class CarDetails implements OnInit {
     //       this.message = err;
     //     });
    
-    this.carService.getCar$(Number(id)).subscribe({
+    this.carService.getCar$(Number(this.carId)).subscribe({
       next: c => {
           this.car = c;
           console.log('CarDetails.ngOnInit(): car ', this.car);
           this.message = null;
         },
         error: err => {
-          console.error('CarDetails.ngOnInit(): error getting car id=', id, ' err=', err);
+          console.error('CarDetails.ngOnInit(): error getting car id=', this.carId, ' err=', err);
           this.message = err;
         },
         complete: () => {
