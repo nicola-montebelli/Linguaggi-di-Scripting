@@ -11,7 +11,7 @@ node_modules/
 dist
 #tsconfig.json
 *.d.ts
-*.js
+#*.js
 #package-lock.json
 #package.json
 

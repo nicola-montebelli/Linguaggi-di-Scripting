@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'; 
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
 import CardAuto from "./CardAuto";
 import Loading from "./Loading"
 import { get as getAutomobili } from "../services/automobili"
@@ -7,6 +7,7 @@ import SelectMarcheAuto from '../components/SelectMarche';
 import SelectColore from './SelectColore';
 import SelectAnno from './SelectAnno';
 import SelectModello from './SelectModello';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function GridAutomobili(){
     const [Loaded, setLoaded] = useState(false);

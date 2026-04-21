@@ -15,3 +15,21 @@ export async function get(filtri){ {/*stesso default di useEffect ('') */}
     }
     return await listaAutomobili.json();
 }
+
+export async function post(automobile){
+    let urlAuto = "https://my-json-server.typicode.com/andreagaspari/zav-react-25/automobili"
+
+    const resp = await fetch(urlAuto, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(automobile)
+    });
+
+    if(!resp.ok)
+    {
+        throw new Error("Errore del server");
+    }
+    return await resp.json();
+}
