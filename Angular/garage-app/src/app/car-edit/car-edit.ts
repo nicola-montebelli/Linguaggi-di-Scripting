@@ -26,10 +26,24 @@ export class CarEdit {
   ngOnInit(): void {
     // determina l'id dell'automobile da modificare'
     this.carId = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('CarEdit.ngOnInit(): car id=', this.carId);
-
-    // Se è stato passato un id, recupera l'automobile'
-    this.loadCar(this.carId);
+    if(this.carId){
+      console.log('CarEdit.ngOnInit(): car id=', this.carId);
+      // Se è stato passato un id, recupera l'automobile'
+      this.loadCar(this.carId);
+    }
+    else {
+      this.car = {
+        id: '',
+        marca: '',
+        modello: '',
+        immagine: '',
+        primaImmatricolazione: '',
+        km: '',
+        colore: '',
+        targa: '',
+        disponibile: true,
+      }
+    }
   }
 
   /**
@@ -39,7 +53,7 @@ export class CarEdit {
   loadCar(carId: string | null) {
     // Se è stato passato un id, recupera l'automobile'
     if (this.carId != null) {
-      this.carService.getCar$(Number(this.carId)).subscribe({
+      this.carService.getCar$(String(this.carId)).subscribe({
         next: c => {
           this.car = c;
           console.log('CarEdit.ngOnInit(): car ', this.car);
@@ -58,17 +72,33 @@ export class CarEdit {
 
   onSave() {
     if (this.car != null) {
-      this.carService.updateCar$(this.car).subscribe(
-        c => {
-          this.car = c;
-          this.message = 'Car updated';
-          this.messageError = null;
-        },
-        err => {
-          console.error('CarEdit.onSave(): error updating car id=', this.carId, ' err=', err);
-          this.messageError = err;
-        }
-      );
+      if(this.car.id.length > 0)
+      {
+        this.carService.updateCar$(this.car).subscribe(
+          c => {
+            this.car = c;
+            this.message = 'Car updated';
+            this.messageError = null;
+          },
+          err => {
+            console.error('CarEdit.onSave(): error updating car id=', this.carId, ' err=', err);
+            this.messageError = err;
+          }
+        );
+      }
+      else{
+        this.carService.createCar$(this.car).subscribe(
+          c => {
+            this.car = c;
+            this.message = "Car Created";
+            this.messageError = null;
+          },
+          err => {
+            console.error('CarEdit.onSave(): error creating car: ', this.car, ' err=', err);
+            this.messageError = err;
+          }
+        );
+      }
     }
   }
 }

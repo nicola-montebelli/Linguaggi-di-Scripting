@@ -1,6 +1,11 @@
 <div class="row mt-3 mb-3">
   <div class="col">
-    <h3>Modifica automobile:</h3>
+    @if(car && car.id.length > 0){
+      <h3>Modifica automobile:</h3>
+    }
+    @else{
+      <h3>Nuova auto:</h3>
+    }
   </div>
 </div>
 
@@ -116,11 +121,20 @@
         </a>
       </div>
 
+      
       <div class="col-2">
-        <button type="submit" class="btn btn-success">
-          <i class="fa-solid fa-floppy-disk"></i>
-          Salva
-        </button>
+        @if(car && car.id.length > 0){
+          <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Salva
+          </button>
+        }
+        @else{
+          <button type="submit" class="btn btn-warning">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Crea Auto
+          </button>
+        }
       </div>
     </div>
   </form>

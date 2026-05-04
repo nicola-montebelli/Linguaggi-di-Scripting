@@ -8,6 +8,7 @@ import { CarEdit } from './car-edit/car-edit';
 const routes: Routes = [
   {path: '', component: CarList},
   {path: 'car', component: CarList},
+  {path: 'car/new', component: CarEdit},
   {path: 'car/:id', component: CarDetails},
   {path: 'car/:id/edit', component: CarEdit},
  //altrimenti redireziona alla home

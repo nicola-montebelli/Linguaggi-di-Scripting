@@ -1,6 +1,14 @@
-<div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Enter Search text" aria-label="Enter search text" aria-describedby="button-addon2" [(ngModel)]="searchText" (input)="onSearch()">
-  <button class="btn btn-outline-secondary" type="button" id="button-search" (click)="onSearch()">Search</button>
+<div class="row">
+  <div class="col-4">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Enter Search text" aria-label="Enter search text" aria-describedby="button-addon2" [(ngModel)]="searchText" (input)="onSearch()">
+      <button class="btn btn-outline-secondary" type="button" id="button-search" (click)="onSearch()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+      
+    </div>
+  </div>
+  <div class="col-2">
+      <button class="btn btn-success" type="button" id="button-new" [routerLink]="['car/new']">Inserisci Auto <i class="fa-solid fa-plus"></i></button>
+  </div>
 </div>
 
 @if (message) {
@@ -16,3 +24,6 @@
                 <!-- [car] è l' @Input del componente car.ts | c è l'elemento corrente del ciclo for -->
         }
     </div>
+
+
+ 

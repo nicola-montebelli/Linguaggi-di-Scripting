@@ -20,19 +20,8 @@ export class CarList implements OnInit, OnDestroy {
   
 //lifecycle hooks
   ngOnInit() {
-    //richiama il service per ottenere l'elenco (implementazione con Promise file car-service.ts)
-    // this.carService.getCarList()
-    // .then(list => {
-    //   this.carList = list;
-    //   this.message = null;
-    // })
-    // .catch(err => {
-    //   console.error("Errore", err);
-    //   this.message = err;
-    // })
-
     //implementazione con Observable
-    this.carService.getCarList$().subscribe(  //chiedere al prof riguardo a carService, mergemap
+    this.carService.getCarList$().subscribe(  
       list => {
       this.carList = list;
       this.message = null;
@@ -82,4 +71,19 @@ export class CarList implements OnInit, OnDestroy {
       }
     )
   }
+
+
+
+  // Creazione:
+  //
+  // + nella pagina di elenco, a fianco della ricerca, aggiungere un pulsante "+ Nuovo"
+  // + visualizzazione form inserimento nuova Car
+  // + nel form creazione ci sarà il pulsante di "Crea" che:
+  //   - chiamerà il service passando i dati nella nuova Car
+  //   - il service chiamerà l'API del backend per creare la nuova Car
+  //   - se tutto va bene, visualizziamo la pagina di dettaglio della Car appena creata
+  //
 }
+
+
+

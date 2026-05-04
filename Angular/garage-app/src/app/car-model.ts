@@ -1,7 +1,7 @@
 // Modella l'interfaccia ICar per il dato in
 // https://my-json-server.typicode.com/andreagaspari/zav-react-25/automobili
 export interface ICar {
-  id: number;
+  id: string;
   marca: string;
   modello: string;
   immagine: string;
@@ -13,7 +13,7 @@ export interface ICar {
 }
 
 export interface ICarBackend {
-  id: number;
+  id?: string;
   marca: string;
   modello: string;
   immagine: string;

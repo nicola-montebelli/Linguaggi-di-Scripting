@@ -22,7 +22,7 @@ constructor(private http: HttpClient){
    */
   private mapICarBackendToICar(cb: ICarBackend): ICar {
     const c: ICar = {
-              id: cb.id,
+              id: (cb.id && cb.id.length > 0 ? cb.id : ''),
               marca: cb.marca,
               modello: cb.modello,
               immagine: cb.immagine,
@@ -42,7 +42,6 @@ constructor(private http: HttpClient){
    */
   private mapICarToICarBackend(c: ICar): ICarBackend {
     const cb: ICarBackend = {
-              id: c.id,
               marca: c.marca,
               modello: c.modello,
               immagine: c.immagine,
@@ -52,6 +51,9 @@ constructor(private http: HttpClient){
               disponibile: c.disponibile,
               km: Number(c.km)
             };
+    if(c.id.length > 0){
+      cb.id = c.id;
+    }
     return cb;
   }
 
@@ -72,7 +74,7 @@ getCarList(): Promise<ICar[]> {
 
 
 
- getCar(id: number): Promise<ICar> {
+ getCar(id: string): Promise<ICar> {
     return firstValueFrom(
       this.http.get<ICarBackend>(`${this.baseUrl}/${id}`).pipe(
         map(cb => this.mapICarBackendToICar(cb))
@@ -114,7 +116,7 @@ getCarList$(searchText?: string): Observable<ICar[]> {
     }
   }   
 
-getCar$(id: number): Observable<ICar>{
+getCar$(id: string): Observable<ICar>{
     return this.http.get<ICarBackend>(`${this.baseUrl}/${id}`).pipe(
       map(cb => this.mapICarBackendToICar(cb)),   // cb: ICarBackend
     );
@@ -128,8 +130,20 @@ getCar$(id: number): Observable<ICar>{
       );
   }
 
-  deleteCar$(carId: number): Observable<ICar> {
+  deleteCar$(carId: string): Observable<ICar> {
     return this.http.delete<any>(`${this.baseUrl}/${carId}`)
+      .pipe(
+        map(cb => this.mapICarBackendToICar(cb)),
+      );
+  }
+
+
+  /**
+   * Crea una nuova auto sul backend
+   * @param carId identificativo dell'auto
+   */
+  createCar$(car: ICar): Observable<ICar> {
+    return this.http.post<any>(`${this.baseUrl}`, this.mapICarToICarBackend(car))
       .pipe(
         map(cb => this.mapICarBackendToICar(cb)),
       );

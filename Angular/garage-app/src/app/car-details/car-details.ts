@@ -26,7 +26,7 @@ export class CarDetails implements OnInit {
     // console.log('CarDetails.ngOnInit(): car id=', id);
     if (this.carId != null) {
    
-    this.carService.getCar$(Number(this.carId)).subscribe({ //subscribe è un metodo rxjs che ritorna un osbervable che è in ascolto per un flusso di eventi
+    this.carService.getCar$(String(this.carId)).subscribe({ //subscribe è un metodo rxjs che ritorna un osbervable che è in ascolto per un flusso di eventi
                                                             //a differenza di una promise la subscribe gestisce più eventi
       next: c => {
           this.car = c;
@@ -49,7 +49,7 @@ export class CarDetails implements OnInit {
 
   onDelete() {
      if (this.carId != null) {
-      this.carService.deleteCar$(Number(this.carId)).subscribe({
+      this.carService.deleteCar$(this.carId).subscribe({
         next: c => {
           this.car = null;
           console.log('CarDetails.onDelete(): ',c);
