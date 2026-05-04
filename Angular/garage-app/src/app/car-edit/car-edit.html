@@ -1,1 +1,131 @@
-<p>car-edit works!</p>
+<div class="row mt-3 mb-3">
+  <div class="col">
+    <h3>Modifica automobile:</h3>
+  </div>
+</div>
+
+@if (message) {
+  <div class="alert alert-info" role="alert">
+    {{ message }}
+  </div>
+}
+@if (messageError) {
+  <div class="alert alert-danger" role="alert">
+    {{ messageError }}
+  </div>
+}
+
+@if (car) {
+  <form (ngSubmit)="onSave()">
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="marca" class="form-label">Marca</label>
+        <input
+          type="text"
+          id="marca"
+          name="marca"
+          class="form-control"
+          [(ngModel)]="car.marca"
+          required>
+      </div>
+
+      <div class="col-md-5">
+        <label for="modello" class="form-label">Modello</label>
+        <input
+          type="text"
+          id="modello"
+          name="modello"
+          class="form-control"
+          [(ngModel)]="car.modello"
+          required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="immagine" class="form-label">Immagine</label>
+      <input
+        type="text"
+        id="immagine"
+        name="immagine"
+        class="form-control"
+        [(ngModel)]="car.immagine">
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="primaImmatricolazione" class="form-label">Prima immatricolazione</label>
+        <input
+          type="text"
+          id="primaImmatricolazione"
+          name="primaImmatricolazione"
+          class="form-control"
+          inputmode="numeric"
+          [(ngModel)]="car.primaImmatricolazione"
+          required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="km" class="form-label">Km</label>
+        <input
+          type="text"
+          id="km"
+          name="km"
+          class="form-control"
+          inputmode="numeric"
+          [(ngModel)]="car.km"
+          required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="colore" class="form-label">Colore</label>
+        <input
+          type="text"
+          id="colore"
+          name="colore"
+          class="form-control"
+          [(ngModel)]="car.colore"
+          required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="targa" class="form-label">Targa</label>
+        <input
+          type="text"
+          id="targa"
+          name="targa"
+          class="form-control"
+          [(ngModel)]="car.targa">
+      </div>
+    </div>
+
+    <div class="form-check mb-3">
+      <input
+        type="checkbox"
+        id="disponibile"
+        name="disponibile"
+        class="form-check-input"
+        [(ngModel)]="car.disponibile">
+      <label for="disponibile" class="form-check-label">Disponibile</label>
+    </div>
+
+    <div class="row mt-3 mb-3">
+      <div class="col-2">
+        <a class="btn btn-primary" [routerLink]="'/car/' + carId">
+          <i class="fa-solid fa-xmark"></i>
+          Annulla
+        </a>
+      </div>
+
+      <div class="col-2">
+        <button type="submit" class="btn btn-success">
+          <i class="fa-solid fa-floppy-disk"></i>
+          Salva
+        </button>
+      </div>
+    </div>
+  </form>
+} @else {
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+}

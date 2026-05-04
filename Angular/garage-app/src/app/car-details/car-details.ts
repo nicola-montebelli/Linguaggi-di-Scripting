@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CarService, ICar } from '../car-service';
-import { ActivatedRoute } from '@angular/router';
+import { CarService} from '../car-service';
+import { ICar } from '../car-model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-details',
@@ -14,7 +15,8 @@ export class CarDetails implements OnInit {
   carId: string | null = '';
 
   constructor(private activatedRoute: ActivatedRoute, 
-    private carService: CarService){
+    private carService: CarService,
+    private router: Router){
 
   }
 
@@ -23,18 +25,9 @@ export class CarDetails implements OnInit {
      this.carId = this.activatedRoute.snapshot.paramMap.get('id'); //'id' dalla configurazione del Router
     // console.log('CarDetails.ngOnInit(): car id=', id);
     if (this.carId != null) {
-    //   this.carService.getCar(Number(id))
-    //     .then(c => {
-    //       this.car = c;
-    //       console.log('CarDetails.ngOnInit(): car ', this.car);
-    //       this.message = null;
-    //     })
-    //     .catch(err => {
-    //       console.error('CarDetails.ngOnInit(): error getting car id=', id, ' err=', err);
-    //       this.message = err;
-    //     });
    
-    this.carService.getCar$(Number(this.carId)).subscribe({
+    this.carService.getCar$(Number(this.carId)).subscribe({ //subscribe è un metodo rxjs che ritorna un osbervable che è in ascolto per un flusso di eventi
+                                                            //a differenza di una promise la subscribe gestisce più eventi
       next: c => {
           this.car = c;
           console.log('CarDetails.ngOnInit(): car ', this.car);
@@ -52,5 +45,22 @@ export class CarDetails implements OnInit {
   
   }
 
+  }
+
+  onDelete() {
+     if (this.carId != null) {
+      this.carService.deleteCar$(Number(this.carId)).subscribe({
+        next: c => {
+          this.car = null;
+          console.log('CarDetails.onDelete(): ',c);
+          this.message = "Auto Eliminata";
+          setTimeout(() => this.router.navigate(['/']), 5000); //questa funzione riporta alla pagina indice dopo l'eliminazione dopo 5 secondi
+        },
+        error: err => {
+          console.error('CarDetails.onDelete(): error removing car id=', this.carId, ' err=', err);
+          this.message = err;
+        }
+      });
+    }
   }
 }

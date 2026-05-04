@@ -7,6 +7,9 @@
   <div class="d-flex gap-5">
     <h3>Dettaglio</h3>
     <a [routerLink]="'/car/' + carId + '/edit'" class="btn btn-warning">Modifica</a>
+    <button class="btn btn-danger" (click)="onDelete()">Elimina 
+      <i class="fa-solid fa-trash-can"></i>
+    </button>
   </div>
 }
 
@@ -28,7 +31,7 @@
         <p class="card-text"></p>
       }
       <p class="card-text">{{car.colore}}</p>
-      <p class="card-text">Anno: {{car.anno}}</p>
+      <p class="card-text">Anno: {{car.primaImmatricolazione}}</p>
       <p class="card-text">Km: {{car.km}}</p>
       <p class="card-text">{{car.disponibile ? 'Disponibile' : 'Non disponibile'}}</p>
     </div>

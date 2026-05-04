@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ICar, CarService } from '../car-service';
+import { CarService } from '../car-service';
 import { interval, Subscription } from 'rxjs';
+import { ICar } from '../car-model';
 
 @Component({
   selector: 'app-car-list',
