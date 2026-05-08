@@ -1,1 +1,13 @@
-<p>recipe-list works!</p>
+@if ( errorMessage ) {
+  <div class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+}
+
+<div class="row g-4">
+  @for (r of recipeList; track r.id) {
+    <div class="col">
+      <app-recipe [recipe]="r"></app-recipe>
+    </div>
+  }
+</div>

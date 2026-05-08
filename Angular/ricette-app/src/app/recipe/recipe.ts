@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IRecipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './recipe.html',
   styleUrl: './recipe.css',
 })
-export class Recipe {}
+export class Recipe {
+
+  @Input() recipe: IRecipe | null = null; //con @Input la variabile recipe diventa un attributo usato in recipe-list.html
+}

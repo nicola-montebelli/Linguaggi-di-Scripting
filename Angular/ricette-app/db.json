@@ -1,5 +1,32 @@
 {
   "ricette": [
+    {
+      "id": "primo",
+      "nome": "Spaghetti alla carbonara",
+      "categoria": ["primi", "italiano", "uova", "pancetta"],
+      "immagine": "https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/0346a29a89ef229b1a0ff9697184f944/Derivates/cb5051204f4a4525c8b013c16418ae2904e737b7.jpg",
+      "descrizione": "Pasta con uovo e pancetta molto buona",
+      "difficolta": 3,
+      "tempoPreparazione": "15 minuti"
+    },
+    {
+      "id": "secondo",
+      "nome": "Spaghetti alla amatriciana",
+      "categoria": ["primi", "italiano", "uova", "pancetta"],
+      "immagine": "https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/0346a29a89ef229b1a0ff9697184f944/Derivates/cb5051204f4a4525c8b013c16418ae2904e737b7.jpg",
+      "descrizione": "Pasta con uovo e pancetta molto buona",
+      "difficolta": 3,
+      "tempoPreparazione": "15 minuti"
+    },
+    {
+      "id": "terzo",
+      "nome": "Spaghetti allo scoglio",
+      "categoria": ["primi", "italiano", "uova", "pancetta"],
+      "immagine": "https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/0346a29a89ef229b1a0ff9697184f944/Derivates/cb5051204f4a4525c8b013c16418ae2904e737b7.jpg",
+      "descrizione": "Pasta con uovo e pancetta molto buona",
+      "difficolta": 3,
+      "tempoPreparazione": "15 minuti"
+    }
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }
