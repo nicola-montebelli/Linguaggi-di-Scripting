@@ -1,14 +1,20 @@
-import { NgModule, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import {
+  NgModule,
+  provideBrowserGlobalErrorListeners,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { RecipeList } from './recipe-list/recipe-list';
+import { Recipe } from './recipe/recipe';
+import { RecipeDetail } from './recipe-detail/recipe-detail';
+import { RecipeEdit } from './recipe-edit/recipe-edit';
 
 @NgModule({
-  declarations: [
-    App
-  ],
+  declarations: [App, RecipeList, Recipe, RecipeDetail, RecipeEdit],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,6 +25,6 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
   ],
-  bootstrap: [App]
+  bootstrap: [App],
 })
-export class AppModule { }
+export class AppModule {}

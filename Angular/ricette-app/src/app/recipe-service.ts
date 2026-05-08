@@ -70,6 +70,7 @@ export class RecipeService {
 
       /**
        * il secondo map è la funzione angular per gli array
+       * e ci evita questa porzione di codice:
        * map((lrb: IRicettaBackend[]) => {
         // return lrb.map(rb => this.mapIRicettaBackendToIRecipe(rb))
         const lr: IRecipe[] = [];
