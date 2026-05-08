@@ -1,1 +1,62 @@
-<p>recipe-detail works!</p>
+<!-- pulsanti -->
+<div class="row mt-3 mb-3">
+  <!-- spazio -->
+  <div class="col-1"></div>
+  <!-- torna all'elenco -->
+  <div class="col-2">
+    <a [routerLink]="'/'" class="btn btn-primary">
+      <i class="fa-solid fa-chevron-left"></i>
+      Elenco
+    </a>
+  </div>
+  <!-- modifica -->
+  <!-- div class="col-2">
+    <a [routerLink]="'/car/' + carId + '/edit'" class="btn btn-secondary">
+      <i class="fa-solid fa-pen-to-square"></i>
+      Modifica
+    </a>
+  </div -->
+  <!-- elimina -->
+  <!-- div class="col-2">
+    <button class="btn btn-danger" (click)="onDelete()">
+      <i class="fa-solid fa-trash-can"></i>
+      Elimina
+    </button>
+  </div-->
+</div>
+
+
+<div class="row mt-3 mb-3">
+  <div class="col">
+    <h3>Dettaglio:</h3>
+  </div>
+</div>
+
+@if (errorMessage) {
+  <div class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+}
+
+@if (recipe) {
+  <div class="card" style="width: 18rem;">
+    <img src="{{ recipe.image }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ recipe.name}}</h5>
+      <p class="card-text">
+        @for (c of recipe.category; track c ) {
+          {{ c }},
+        }
+      </p>
+      <p class="card-text">difficoltà: {{ recipe.difficulty }}</p>
+      <p class="card-text">tempo: {{ recipe.prepTime }}</p>
+      <p class="card-text">
+        {{recipe.description}}
+      </p>
+    </div>
+  </div>
+} @else {
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+}
