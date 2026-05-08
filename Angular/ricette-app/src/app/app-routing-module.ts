@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'recipe/:id', component: RecipeDetail},
   {path: 'recipe/:id/edit', component: RecipeEdit},
 
-  //redirects to home
+  //redirects to homepage
   {path: '**', redirectTo: ''},
 ];
 
