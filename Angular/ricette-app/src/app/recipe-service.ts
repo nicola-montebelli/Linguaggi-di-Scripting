@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { IRecipe, IRecipeBackend } from './recipe.model';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
 
+  private baseUrl: string = 'http://localhost:3000/ricette';
+
+  constructor(private http: HttpClient){
+  }
   /**
    * abbiamo la necessità di trasformare il modello dati frontend in backend e viceversa
    */
@@ -46,5 +52,58 @@ export class RecipeService {
       rb.id = r.id;
     }
     return rb;
+  }
+
+
+/**
+* Implementazioni dei metodi CRUD verso il backend
+*/
+
+  /**
+   * GET http://localhost:3000/ricette
+   * @returns Elenco ricette
+   */
+  getRecipeList$(): Observable<IRecipe[]>{
+    //TODO
+    return this.http.get<IRecipeBackend[]>(this.baseUrl).pipe(
+      map(l => l.map(rb => this.mapIRecipeBackendToIRecipe(rb)))  //il primo map è l'operatore rxjs
+
+      /**
+       * il secondo map è la funzione angular per gli array
+       * map((lrb: IRicettaBackend[]) => {
+        // return lrb.map(rb => this.mapIRicettaBackendToIRecipe(rb))
+        const lr: IRecipe[] = [];
+        for (let i = 0; i < lrb.length; i++) {
+          const r: IRecipe = this.mapIRicettaBackendToIRecipe(lrb[i]);
+          lr.push(r);
+        }
+        return lr;
+      })
+       */
+    );
+  }
+
+  getRecipe$(id: string): Observable<IRecipe>{
+    return this.http.get<IRecipeBackend>(`${this.baseUrl}/${id}`).pipe(
+      map(rb => this.mapIRecipeBackendToIRecipe(rb))
+    )
+  }
+
+  createRecipe$(recipe: IRecipe): Observable<IRecipe>{
+    return this.http.post<IRecipeBackend>(`${this.baseUrl}`, this.mapIRecipeToIRecipeBackend(recipe)).pipe(
+      map(rb => this.mapIRecipeBackendToIRecipe(rb))
+    );
+  }
+
+  updateRecipe$(recipe: IRecipe): Observable<IRecipe> {
+    return this.http.put<IRecipeBackend>(`${this.baseUrl}/${recipe.id}`, this.mapIRecipeToIRecipeBackend(recipe)).pipe(
+      map(rb => this.mapIRecipeBackendToIRecipe(rb))
+    );
+  }
+
+  deleteRecipe$(id: string): Observable<IRecipe> {
+    return this.http.delete<IRecipeBackend>(`${this.baseUrl}/${id}`).pipe(
+      map(rb => this.mapIRecipeBackendToIRecipe(rb))
+    );
   }
 }
